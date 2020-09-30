@@ -1,62 +1,29 @@
 class Heap(object):
-    """
-    Une heap est une structure de données sous forme d'arbre.
-
-    https://en.wikipedia.org/wiki/Heap_(data_structure)
-    """
-
     def insert(self, value: int) -> None:
-        """
-        Ajoute une valeur dans l'arbre
-        """
         pass
 
     def find_min(self) -> int:
-        """
-        Retourne la valeur minimum dans l'arbre
-        """
         pass
 
     def delete_min(self) -> int:
-        """
-        Supprime et retourne la valeur minimum dans l'arbre
-        """
         pass
 
     def decrease_key(self, current_value: int, new_value :int) -> None:
-        """
-        Modify une valeur dans l'arbre
-        """
         pass
 
     def merge(self, fibonnaci_heap: object) -> None:
-        """
-        Fusionne deux arbres
-        """
         pass
 
 
 class FibonacciHeap(Heap):
-    """
-    Une fibonnaci heap est un arbre permettant de stocker et trier des donnés efficacement
 
-    https://en.wikipedia.org/wiki/Fibonacci_heap
-
-    L'implémentation est décrite en anglais : https://en.wikipedia.org/wiki/Fibonacci_heap#Implementation_of_operations
-    et en français : https://fr.wikipedia.org/wiki/Tas_de_Fibonacci#Implémentation_des_opérations
-    """
+    nodes: list = []
 
     def insert(self, value: int) -> None:
-        """
-        Ajoute une valeur dans l'arbre
-        """
-        pass
+        self.nodes.append(value)
 
     def find_min(self) -> int:
-        """
-        Retourne la valeur minimum dans l'arbre
-        """
-        pass
+        return min(self.nodes)
 
     def delete_min(self) -> int:
         """
@@ -69,3 +36,34 @@ class FibonacciHeap(Heap):
         Fusionne deux arbres
         """
         pass
+
+fibonacci_heap = FibonacciHeap()
+fibonacci_heap.insert(10)
+fibonacci_heap.insert(6)
+fibonacci_heap.insert(4)
+fibonacci_heap.insert(8)
+
+secondary_heap = FibonacciHeap()
+secondary_heap.insert(10)
+secondary_heap.insert(6)
+secondary_heap.insert(4)
+secondary_heap.insert(2)
+
+if fibonacci_heap.find_min() == 4:
+    print("Find_min fonctionnel.")
+else:
+    print("Find_min non fonctionnel")
+
+fibonacci_heap.delete_min()
+
+if fibonacci_heap.find_min() == 8:
+    print("Delete_min fonctionnel.")
+else:
+    print("Delete_min non fonctionnel")
+
+fibonacci_heap.merge(secondary_heap)
+
+if fibonacci_heap.find_min() == 2:
+    print("Merge fonctionnel.")
+else:
+    print("Merge non fonctionnel")
