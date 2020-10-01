@@ -103,7 +103,7 @@ class FibonacciHeap(Heap):
                 self.min_node = find_min_node_in_node_list(self.nodes)
                 return node
 
-    def delete_min(self):
+    def delete_min(self) -> int:
         min_value = self.min_node.value
         self.delete_min_node()
         return min_value
