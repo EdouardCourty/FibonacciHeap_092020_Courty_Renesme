@@ -55,10 +55,10 @@ def get_number_of_same_count_nodes(node_list: list):
     if not isinstance(node_list, list):
         raise ValueError("You must input a Node List.")
     return 2
-    #highest_count = 1
-    #for node in node_list:
-    #    if node.count > highest_count:
-    #        highest_count = node.count
+    highest_count = 1
+    for node in node_list:
+        if node.count > highest_count:
+            highest_count = node.count
 
 
 
