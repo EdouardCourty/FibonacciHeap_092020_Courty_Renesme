@@ -8,13 +8,12 @@ class Heap(object):
     def delete_min(self) -> int:
         pass
 
-    def decrease_key(self, current_value: int, new_value :int) -> None:
-        pass
-
     def merge(self, fibonnaci_heap: object) -> None:
         pass
 
-def find_min_node_in_node_list(node_list):
+def find_min_node_in_node_list(node_list: list):
+    if not isinstance(node_list, list):
+        raise ValueError("You must input a Node List.")
     minimal = None
     for node in node_list:
         if node_list.index(node) != 0:
@@ -26,12 +25,30 @@ def find_min_node_in_node_list(node_list):
                 minimal = value_lower
     return [node for node in node_list if node.value == minimal][0]
 
+def return_smallest_node_after_lowest(node_list: list):
+    if not isinstance(node_list, list):
+        raise ValueError("You must input a Node List.")
+    lowest_node = find_min_node_in_node_list(node_list)
+    clone_list = [node for node in node_list if node.value != lowest_node.value]
+    minimal = None
+    for node in clone_list:
+        if clone_list.index(node) > 0:
+            value_upper = node.value
+            value_lower = clone_list[clone_list.index(node)-1].value
+            if value_upper < value_lower:
+                minimal = value_upper
+            else:
+                minimal = value_lower
+    return [node for node in clone_list if node.value == minimal][0]
+
 def is_odd(nbr: int):
     return True if nbr % 2 == 0 else False
 
 class FibonacciHeap(Heap):
     class Node:
-        def __init__(self, value):
+        def __init__(self, value: int):
+            if not isinstance(value, int):
+                raise ValueError("You must input an Integer value.")
             self.children = []
             self.value  = value
             self.count = 1
@@ -41,6 +58,8 @@ class FibonacciHeap(Heap):
         self.min_node = None
 
     def insert(self, value: int) -> None:
+        if not isinstance(value, int):
+            raise ValueError("You must input an Integer value.")
         new_node = self.Node(value)
         self.nodes.append(new_node)
         if self.min_node is None or self.min_node.value > new_node.value:
@@ -59,18 +78,20 @@ class FibonacciHeap(Heap):
         return min_value
 
     def merge(self, second_heap: Heap) -> None:
+        if not isinstance(second_heap, Heap):
+            raise ValueError("You must input a Heap to be merged.")
         if self.min_node.value > second_heap.min_node.value:
             self.min_node.value = second_heap.min_node.value
         self.nodes += second_heap.nodes
 
-    def consolidate(self):
-        pass
 
 fibonacci_heap = FibonacciHeap()
 fibonacci_heap.insert(10)
 fibonacci_heap.insert(6)
 fibonacci_heap.insert(4)
 fibonacci_heap.insert(8)
+
+print(return_smallest_node_after_lowest(fibonacci_heap.nodes).value)
 
 secondary_heap = FibonacciHeap()
 secondary_heap.insert(5)
